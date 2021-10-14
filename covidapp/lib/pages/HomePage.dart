@@ -6,6 +6,7 @@ import '../widgets/WorldData.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'GoToNext.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -63,106 +64,78 @@ class _HomePage extends State<HomePage> {
         title: Center(child: const Text("Covid Seva Portal")),
         backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: <Widget>[
-          WorldData(),
-          Text(
-            "Search by Region",
-            style: TextStyle(
-              fontSize: 18,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            WorldData(),
+            Text(
+              "Search by Region",
+              style: TextStyle(
+                fontSize: 18,
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: SelectState(
-              onCountryChanged: (value) {
-                setState(() {
-                  chosenCountry = value.split(regex)[2].trim();
-                  response = "";
-                  getStats(chosenCountry.toString());
-                });
-              },
-              onStateChanged: (value) {
-                setState(() {
-                  chosenState = value;
-                  response = "";
-                });
-              },
-              onCityChanged: (value) {
-                setState(() {
-                  chosenCity = value;
-                  response = "";
-                });
-              },
+            Container(
+              padding: EdgeInsets.all(20),
+              margin: EdgeInsets.all(10),
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black)),
+              child: SelectState(
+                onCountryChanged: (value) {
+                  setState(() {
+                    chosenCountry = value.split(regex)[2].trim();
+                    response = "";
+                    getStats(chosenCountry.toString());
+                  });
+                },
+                onStateChanged: (value) {
+                  setState(() {
+                    chosenState = value;
+                    response = "";
+                  });
+                },
+                onCityChanged: (value) {
+                  setState(() {
+                    chosenCity = value;
+                    response = "";
+                  });
+                },
+              ),
             ),
-          ),
-          Text(response.toString()),
-          FlatButton(
-            textColor: Colors.white,
-            onPressed: () {
-              if (chosenCountry != null &&
-                  chosenState != null &&
-                  chosenCity != null) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => GoToNext(
-                        chosenCountry.toString(),
-                        stat.cases.toString(),
-                        stat.deaths.toString(),
-                        stat.recovered.toString(),
-                        stat.todayactive.toString(),
-                        stat.todaydeaths.toString(),
-                        stat.todaycases.toString())));
-              } else if (chosenCountry == null &&
-                  chosenState == null &&
-                  chosenCity == null) {
-                getError("Please select Country, State, City");
-              } else if (chosenCountry != null &&
-                  chosenState == null &&
-                  chosenCity == null) {
-                getError("Please select State, City");
-              } else if (chosenCountry != null &&
-                  chosenState != null &&
-                  chosenCity == null) {
-                getError("Please select City");
-              }
-            },
-            child: Text("Search"),
-            color: Colors.green,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class GoToNext extends StatelessWidget {
-  final String country,
-      cases,
-      deaths,
-      recovered,
-      active,
-      todaydeaths,
-      todaycases;
-  const GoToNext(this.country, this.cases, this.deaths, this.recovered,
-      this.active, this.todaydeaths, this.todaycases);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(country),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Text("Total Cases : " + cases),
-          Text("Total Deaths : " + deaths),
-          Text("Total Recovered : " + recovered),
-          Text("Active Today : " + active),
-          Text("Total Recovered : " + todaydeaths),
-          Text("Cases Today : " + todaycases),
-        ],
+            Text(response.toString()),
+            FlatButton(
+              textColor: Colors.white,
+              onPressed: () {
+                if (chosenCountry != null &&
+                    chosenState != null &&
+                    chosenCity != null) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => GoToNext(
+                          chosenCountry.toString(),
+                          stat.cases.toString(),
+                          stat.deaths.toString(),
+                          stat.recovered.toString(),
+                          stat.todayactive.toString(),
+                          stat.todaydeaths.toString(),
+                          stat.todaycases.toString())));
+                } else if (chosenCountry == null &&
+                    chosenState == null &&
+                    chosenCity == null) {
+                  getError("Please select Country, State, City");
+                } else if (chosenCountry != null &&
+                    chosenState == null &&
+                    chosenCity == null) {
+                  getError("Please select State, City");
+                } else if (chosenCountry != null &&
+                    chosenState != null &&
+                    chosenCity == null) {
+                  getError("Please select City");
+                }
+              },
+              child: Text("Search"),
+              color: Colors.green,
+            ),
+          ],
+        ),
       ),
     );
   }

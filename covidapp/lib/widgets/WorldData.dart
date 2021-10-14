@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'Stat_Card.dart';
 
 class Stat {
   final cases;
@@ -72,12 +73,27 @@ class _WorldData extends State<WorldData> {
       child: Column(
         children: [
           const Text("World Statistics"),
-          Text("Total Cases : " + stat.cases.toString()),
-          Text("Total Recovered : " + stat.recovered.toString()),
-          Text("Total Deaths : " + stat.deaths.toString()),
-          Text("Active : " + stat.todayactive.toString()),
-          Text("Deaths Today : " + stat.todaydeaths.toString()),
-          Text("Cases Today : " + stat.todaycases.toString()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stat_Card("Total Cases", stat.cases.toString()),
+              Stat_Card("Total Recovered", stat.recovered.toString()),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stat_Card("Total Deaths", stat.deaths.toString()),
+              Stat_Card("Active", stat.todayactive.toString()),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stat_Card("Deaths Today", stat.todaydeaths.toString()),
+              Stat_Card("Cases Today", stat.todaycases.toString()),
+            ],
+          )
         ],
       ),
     );

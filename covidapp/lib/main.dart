@@ -44,7 +44,12 @@ class _SplashScreen extends State<SplashScreen> {
       child: Column(
         children: [
           Image.asset("images/coronadr.png"),
-          Text("The Robotics Forums")
+          Text("The Robotics Forums",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w100,
+                  fontSize: 28,
+                  decoration: TextDecoration.none))
         ],
       ),
     );
