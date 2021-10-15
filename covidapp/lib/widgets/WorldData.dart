@@ -92,8 +92,8 @@ class _WorldData extends State<WorldData> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stat_Card(
-                  "Total Cases", stat.cases.toString(), Colors.deepOrange),
+              Stat_Card("Total Cases", stat.cases.toString(),
+                  Color.fromRGBO(39, 105, 171, 1)),
               Stat_Card("Total Recovered", stat.recovered.toString(),
                   Colors.greenAccent),
             ],

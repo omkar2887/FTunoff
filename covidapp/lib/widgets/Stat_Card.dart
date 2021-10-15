@@ -17,7 +17,7 @@ class Stat_Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.lightBlue,
+      color: Colors.white,
       elevation: 2,
       child: Container(
         width: MediaQuery.of(context).size.width / 2.4,
@@ -30,14 +30,14 @@ class Stat_Card extends StatelessWidget {
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width / 25,
                 fontWeight: FontWeight.normal,
-                color: Colors.white,
+                color: Color.fromRGBO(39, 105, 171, 1),
                 fontFamily: 'Nunito',
               ),
             ),
             Text(
               data,
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width / 15,
+                fontSize: MediaQuery.of(context).size.width / 20,
                 fontWeight: FontWeight.bold,
                 color: _mycolor,
                 fontFamily: 'Nunito',
