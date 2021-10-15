@@ -61,80 +61,109 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text("Covid Seva Portal")),
+        title: Center(child: const Text("Covid Tracker App")),
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            WorldData(),
-            Text(
-              "Search by Region",
-              style: TextStyle(
-                fontSize: 18,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: const [
+                Colors.indigo,
+                Colors.blue,
+                Colors.lightGreen,
+              ])),
+          child: Column(
+            children: <Widget>[
+              WorldData(),
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 20, right: 5, left: 5, bottom: 5),
+                child: Text(
+                  "Search by region",
+                  style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(20),
-              margin: EdgeInsets.all(10),
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-              child: SelectState(
-                onCountryChanged: (value) {
-                  setState(() {
-                    chosenCountry = value.split(regex)[2].trim();
-                    response = "";
-                    getStats(chosenCountry.toString());
-                  });
-                },
-                onStateChanged: (value) {
-                  setState(() {
-                    chosenState = value;
-                    response = "";
-                  });
-                },
-                onCityChanged: (value) {
-                  setState(() {
-                    chosenCity = value;
-                    response = "";
-                  });
-                },
+              Card(
+                elevation: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: const [
+                        Colors.indigo,
+                        Colors.blue,
+                        Colors.lightGreen,
+                      ])),
+                  padding: EdgeInsets.all(20),
+                  child: SelectState(
+                    onCountryChanged: (value) {
+                      setState(() {
+                        chosenCountry = value.split(regex)[2].trim();
+                        response = "";
+                        getStats(chosenCountry.toString());
+                      });
+                    },
+                    onStateChanged: (value) {
+                      setState(() {
+                        chosenState = value;
+                        response = "";
+                      });
+                    },
+                    onCityChanged: (value) {
+                      setState(() {
+                        chosenCity = value;
+                        response = "";
+                      });
+                    },
+                  ),
+                ),
               ),
-            ),
-            Text(response.toString()),
-            FlatButton(
-              textColor: Colors.white,
-              onPressed: () {
-                if (chosenCountry != null &&
-                    chosenState != null &&
-                    chosenCity != null) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => GoToNext(
-                          chosenCountry.toString(),
-                          stat.cases.toString(),
-                          stat.deaths.toString(),
-                          stat.recovered.toString(),
-                          stat.todayactive.toString(),
-                          stat.todaydeaths.toString(),
-                          stat.todaycases.toString())));
-                } else if (chosenCountry == null &&
-                    chosenState == null &&
-                    chosenCity == null) {
-                  getError("Please select Country, State, City");
-                } else if (chosenCountry != null &&
-                    chosenState == null &&
-                    chosenCity == null) {
-                  getError("Please select State, City");
-                } else if (chosenCountry != null &&
-                    chosenState != null &&
-                    chosenCity == null) {
-                  getError("Please select City");
-                }
-              },
-              child: Text("Search"),
-              color: Colors.green,
-            ),
-          ],
+              Text(response.toString()),
+              FlatButton(
+                textColor: Colors.white,
+                onPressed: () {
+                  if (chosenCountry != null &&
+                      chosenState != null &&
+                      chosenCity != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => GoToNext(
+                            chosenCountry.toString(),
+                            chosenState.toString(),
+                            chosenCity.toString(),
+                            stat.cases.toString(),
+                            stat.deaths.toString(),
+                            stat.recovered.toString(),
+                            stat.todayactive.toString(),
+                            stat.todaydeaths.toString(),
+                            stat.todaycases.toString())));
+                  } else if (chosenCountry == null &&
+                      chosenState == null &&
+                      chosenCity == null) {
+                    getError("Please select Country, State, City");
+                  } else if (chosenCountry != null &&
+                      chosenState == null &&
+                      chosenCity == null) {
+                    getError("Please select State, City");
+                  } else if (chosenCountry != null &&
+                      chosenState != null &&
+                      chosenCity == null) {
+                    getError("Please select City");
+                  }
+                },
+                child: Text("Search"),
+                color: Colors.green,
+              ),
+            ],
+          ),
         ),
       ),
     );

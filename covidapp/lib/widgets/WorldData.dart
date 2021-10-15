@@ -72,26 +72,43 @@ class _WorldData extends State<WorldData> {
       decoration: const BoxDecoration(),
       child: Column(
         children: [
-          const Text("World Statistics"),
+          Container(
+            margin:
+                const EdgeInsets.only(top: 25, right: 5, left: 5, bottom: 5),
+            child: const Text(
+              "World Statistics",
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontStyle: FontStyle.normal),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stat_Card("Total Cases", stat.cases.toString()),
-              Stat_Card("Total Recovered", stat.recovered.toString()),
+              Stat_Card(
+                  "Total Cases", stat.cases.toString(), Colors.deepOrange),
+              Stat_Card("Total Recovered", stat.recovered.toString(),
+                  Colors.greenAccent),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stat_Card("Total Deaths", stat.deaths.toString()),
-              Stat_Card("Active", stat.todayactive.toString()),
+              Stat_Card(
+                  "Total Deaths", stat.deaths.toString(), Colors.redAccent),
+              Stat_Card("Active", stat.todayactive.toString(),
+                  Colors.deepOrangeAccent),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Stat_Card("Deaths Today", stat.todaydeaths.toString()),
-              Stat_Card("Cases Today", stat.todaycases.toString()),
+              Stat_Card("Deaths Today", stat.todaydeaths.toString(),
+                  Colors.redAccent),
+              Stat_Card("Cases Today", stat.todaycases.toString(),
+                  Colors.deepOrangeAccent),
             ],
           )
         ],
