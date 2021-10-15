@@ -106,10 +106,14 @@ class _HomePage extends State<HomePage> {
                 ),
               ),
               Card(
+                margin: EdgeInsets.only(right: 15, left: 15),
                 elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
@@ -144,6 +148,9 @@ class _HomePage extends State<HomePage> {
               ),
               Text(response.toString()),
               FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 textColor: Colors.white,
                 onPressed: () {
                   if (chosenCountry != null &&
@@ -187,7 +194,8 @@ class _HomePage extends State<HomePage> {
                     style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: MediaQuery.of(context).size.width / 25)),
-                color: Colors.green,
+                // color: Color.fromRGBO(50, 100, 170, 1),
+                color: Colors.blue.shade800,
               ),
             ],
           ),

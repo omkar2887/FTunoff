@@ -78,7 +78,7 @@ class _WorldData extends State<WorldData> {
         children: [
           Container(
             margin:
-                const EdgeInsets.only(top: 15, right: 5, left: 5, bottom: 5),
+                const EdgeInsets.only(top: 50, right: 5, left: 5, bottom: 5),
             child: Text(
               "World Statistics",
               style: TextStyle(
@@ -93,7 +93,7 @@ class _WorldData extends State<WorldData> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stat_Card("Total Cases", stat.cases.toString(),
-                  Color.fromRGBO(39, 105, 171, 1)),
+                  const Color.fromRGBO(39, 105, 171, 1)),
               Stat_Card("Total Recovered", stat.recovered.toString(),
                   Colors.greenAccent),
             ],
