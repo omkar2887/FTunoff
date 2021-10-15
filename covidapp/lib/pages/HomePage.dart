@@ -63,26 +63,32 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-            child: const Text(
-          "Covid Tracker App",
-          style: TextStyle(fontFamily: 'Nunito'),
-        )),
-        backgroundColor: Colors.green,
-      ),
+      // appBar: AppBar(
+      //   toolbarHeight: 40,
+      //   title: Center(
+      //       child: const Text(
+      //     "Covid Tracker App",
+      //     style: TextStyle(
+      //         color: Color.fromRGBO(39, 105, 171, 1), fontFamily: 'Nunito'),
+      //   )),
+      //   backgroundColor: Colors.white,
+      // ),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: const [
-                Colors.indigo,
-                Colors.blue,
-                Colors.lightGreen,
-              ])),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: const [
+                Color.fromRGBO(127, 127, 213, 1),
+                Color.fromRGBO(134, 168, 231, 1),
+                Color.fromRGBO(145, 234, 228, 1)
+              ],
+              //begin: FractionalOffset.bottomCenter,
+              //end: FractionalOffset.topCenter,
+            ),
+          ),
           child: Column(
             children: <Widget>[
               WorldData(),
@@ -103,14 +109,15 @@ class _HomePage extends State<HomePage> {
                 elevation: 3,
                 child: Container(
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: const [
-                        Colors.indigo,
-                        Colors.blue,
-                        Colors.lightGreen,
-                      ])),
+                            Color.fromRGBO(201, 214, 255, 1),
+                            Color.fromRGBO(226, 226, 226, 1)
+                            //Colors.lightGreen,
+                          ])),
                   padding: EdgeInsets.all(20),
                   child: SelectState(
                     onCountryChanged: (value) {
@@ -160,7 +167,9 @@ class _HomePage extends State<HomePage> {
                   } else if (chosenCountry == null &&
                       chosenState == null &&
                       chosenCity == null) {
-                    getError("Please select Country, State, City");
+                    getError(
+                      'Please select Country, State, City',
+                    );
                   } else if (chosenCountry != null &&
                       chosenState == null &&
                       chosenState != "Choose State" &&

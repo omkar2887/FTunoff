@@ -55,7 +55,7 @@ class GoToNext extends StatelessWidget {
               child: Text(
                 "Your Location : " + city.toString() + ", " + state.toString(),
                 style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 25,
+                    fontSize: MediaQuery.of(context).size.width / 23,
                     color: Colors.black,
                     fontStyle: FontStyle.normal,
                     fontFamily: 'Nunito'),
