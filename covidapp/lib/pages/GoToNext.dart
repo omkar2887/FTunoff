@@ -44,9 +44,22 @@ class GoToNext extends StatelessWidget {
           style: const TextStyle(fontFamily: 'Nunito'),
         ),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(37, 105, 171, 1),
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: const [
+              Color.fromRGBO(127, 127, 213, 1),
+              Color.fromRGBO(134, 168, 231, 1),
+              Color.fromRGBO(145, 234, 228, 1)
+            ],
+            //begin: FractionalOffset.bottomCenter,
+            //end: FractionalOffset.topCenter,
+          ),
+        ),
         child: Column(
           children: [
             Container(
@@ -55,8 +68,8 @@ class GoToNext extends StatelessWidget {
               child: Text(
                 "Your Location : " + city.toString() + ", " + state.toString(),
                 style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 23,
-                    color: Colors.black,
+                    fontSize: MediaQuery.of(context).size.width / 28,
+                    color: Colors.white,
                     fontStyle: FontStyle.normal,
                     fontFamily: 'Nunito'),
               ),
@@ -64,16 +77,19 @@ class GoToNext extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stat_Card("Total Cases", cases.toString(), Colors.deepOrange),
+                Stat_Card("Total Cases", cases.toString(),
+                    Color.fromRGBO(80, 200, 120, 1)),
                 Stat_Card("Total Recovered", recovered.toString(),
-                    Colors.greenAccent),
+                    Color.fromRGBO(80, 200, 120, 1)),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stat_Card("Total Deaths", deaths.toString(), Colors.redAccent),
-                Stat_Card("Active", active.toString(), Colors.deepOrangeAccent),
+                Stat_Card("Total Deaths", deaths.toString(),
+                    Color.fromRGBO(255, 191, 0, 1)),
+                Stat_Card("Active", active.toString(),
+                    Color.fromRGBO(255, 191, 0, 1)),
               ],
             ),
             Row(
@@ -81,15 +97,17 @@ class GoToNext extends StatelessWidget {
               children: [
                 Stat_Card(
                     "Deaths Today", todaydeaths.toString(), Colors.redAccent),
-                Stat_Card("Cases Today", todaycases.toString(),
-                    Colors.deepOrangeAccent),
+                Stat_Card(
+                    "Cases Today", todaycases.toString(), Colors.redAccent),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stat_Card("Critical", critical.toString(), Colors.redAccent),
-                Stat_Card("Total Tests", tests.toString(), Colors.greenAccent),
+                Stat_Card("Critical", critical.toString(),
+                    Color.fromRGBO(255, 203, 164, 1)),
+                Stat_Card("Total Tests", tests.toString(),
+                    Color.fromRGBO(255, 203, 164, 1)),
               ],
             ),
             MyChart(cases.toString(), deaths.toString(), recovered.toString(),
@@ -134,7 +152,11 @@ class _MyChartState extends State<MyChart> {
       child: SfCircularChart(
         title: ChartTitle(
             text: "Covid Statistics",
-            textStyle: const TextStyle(fontFamily: 'Nunito')),
+            textStyle: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.normal,
+                fontSize: MediaQuery.of(context).size.width / 18,
+                fontFamily: 'Nunito')),
         tooltipBehavior: _tooltipBehavior,
         legend:
             Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),

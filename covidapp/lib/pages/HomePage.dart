@@ -96,9 +96,9 @@ class _HomePage extends State<HomePage> {
                 margin: const EdgeInsets.only(
                     top: 20, right: 5, left: 5, bottom: 5),
                 child: Text(
-                  "Search by region",
+                  "Search by region\n",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width / 18,
+                      fontSize: MediaQuery.of(context).size.width / 15,
                       fontFamily: 'Nunito',
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
