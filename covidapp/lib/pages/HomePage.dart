@@ -84,8 +84,9 @@ class _HomePage extends State<HomePage> {
                     top: 20, right: 5, left: 5, bottom: 5),
                 child: Text(
                   "Search by region",
-                  style: const TextStyle(
-                      fontSize: 18,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width / 18,
+                      fontFamily: 'Nunito',
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal),
@@ -132,7 +133,9 @@ class _HomePage extends State<HomePage> {
                 textColor: Colors.white,
                 onPressed: () {
                   if (chosenCountry != null &&
+                      chosenState != "Choose State" &&
                       chosenState != null &&
+                      chosenCity != "Choose City" &&
                       chosenCity != null) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => GoToNext(
@@ -151,15 +154,21 @@ class _HomePage extends State<HomePage> {
                     getError("Please select Country, State, City");
                   } else if (chosenCountry != null &&
                       chosenState == null &&
+                      chosenState != "Choose State" &&
+                      chosenCity != "Choose City" &&
                       chosenCity == null) {
                     getError("Please select State, City");
                   } else if (chosenCountry != null &&
                       chosenState != null &&
+                      chosenCity != "Choose City" &&
                       chosenCity == null) {
                     getError("Please select City");
                   }
                 },
-                child: Text("Search"),
+                child: Text("Search",
+                    style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: MediaQuery.of(context).size.width / 25)),
                 color: Colors.green,
               ),
             ],

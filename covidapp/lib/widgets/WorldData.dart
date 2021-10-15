@@ -74,12 +74,13 @@ class _WorldData extends State<WorldData> {
         children: [
           Container(
             margin:
-                const EdgeInsets.only(top: 25, right: 5, left: 5, bottom: 5),
-            child: const Text(
+                const EdgeInsets.only(top: 15, right: 5, left: 5, bottom: 5),
+            child: Text(
               "World Statistics",
               style: TextStyle(
-                  fontSize: 22,
+                  fontSize: MediaQuery.of(context).size.width / 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Nunito',
                   color: Colors.white,
                   fontStyle: FontStyle.normal),
             ),

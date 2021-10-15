@@ -27,15 +27,21 @@ class Stat_Card extends StatelessWidget {
           children: [
             Text(
               datatype,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white),
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width / 25,
+                fontWeight: FontWeight.normal,
+                color: Colors.white,
+                fontFamily: 'Nunito',
+              ),
             ),
             Text(
               data,
               style: TextStyle(
-                  fontSize: 26, fontWeight: FontWeight.bold, color: _mycolor),
+                fontSize: MediaQuery.of(context).size.width / 15,
+                fontWeight: FontWeight.bold,
+                color: _mycolor,
+                fontFamily: 'Nunito',
+              ),
             ),
           ],
         ),
