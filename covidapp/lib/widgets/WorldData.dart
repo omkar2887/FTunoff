@@ -15,13 +15,17 @@ class Stat {
   final todayactive;
   final todaydeaths;
   final todaycases;
+  final critical;
+  final tests;
   Stat(
       {this.cases,
       this.deaths,
       this.recovered,
       this.todayactive,
       this.todaydeaths,
-      this.todaycases});
+      this.todaycases,
+      this.critical,
+      this.tests});
 }
 
 class WorldData extends StatefulWidget {

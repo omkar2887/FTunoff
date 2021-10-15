@@ -20,7 +20,7 @@ class Stat_Card extends StatelessWidget {
       color: Colors.lightBlue,
       elevation: 2,
       child: Container(
-        width: 180,
+        width: MediaQuery.of(context).size.width / 2.4,
         padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

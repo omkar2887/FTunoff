@@ -19,63 +19,91 @@ class GoToNext extends StatelessWidget {
       recovered,
       active,
       todaydeaths,
-      todaycases;
-  const GoToNext(this.country, this.state, this.city, this.cases, this.deaths,
-      this.recovered, this.active, this.todaydeaths, this.todaycases);
+      todaycases,
+      critical,
+      tests;
+  const GoToNext(
+      this.country,
+      this.state,
+      this.city,
+      this.cases,
+      this.deaths,
+      this.recovered,
+      this.active,
+      this.todaydeaths,
+      this.todaycases,
+      this.critical,
+      this.tests);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(country),
+        title: Text(
+          country,
+          style: const TextStyle(fontFamily: 'Nunito'),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(5),
-            child: Text(
-              "Your Location : " + state.toString() + ", " + city.toString(),
-              style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin:
+                  const EdgeInsets.only(top: 15, right: 5, left: 5, bottom: 5),
+              child: Text(
+                "Your Location : " + city.toString() + ", " + state.toString(),
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width / 25,
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Nunito'),
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stat_Card("Total Cases", cases.toString(), Colors.deepOrange),
-              Stat_Card(
-                  "Total Recovered", recovered.toString(), Colors.greenAccent),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stat_Card("Total Deaths", deaths.toString(), Colors.redAccent),
-              Stat_Card("Active", active.toString(), Colors.deepOrangeAccent),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stat_Card(
-                  "Deaths Today", todaydeaths.toString(), Colors.redAccent),
-              Stat_Card("Cases Today", todaycases.toString(),
-                  Colors.deepOrangeAccent),
-            ],
-          ),
-          MyChart(cases.toString(), deaths.toString(), recovered.toString())
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stat_Card("Total Cases", cases.toString(), Colors.deepOrange),
+                Stat_Card("Total Recovered", recovered.toString(),
+                    Colors.greenAccent),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stat_Card("Total Deaths", deaths.toString(), Colors.redAccent),
+                Stat_Card("Active", active.toString(), Colors.deepOrangeAccent),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stat_Card(
+                    "Deaths Today", todaydeaths.toString(), Colors.redAccent),
+                Stat_Card("Cases Today", todaycases.toString(),
+                    Colors.deepOrangeAccent),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stat_Card("Critical", critical.toString(), Colors.redAccent),
+                Stat_Card("Total Tests", tests.toString(), Colors.greenAccent),
+              ],
+            ),
+            MyChart(cases.toString(), deaths.toString(), recovered.toString(),
+                tests.toString())
+          ],
+        ),
       ),
     );
   }
 }
 
 class MyChart extends StatefulWidget {
-  final String Cases, Deaths, Recovered;
-  const MyChart(this.Cases, this.Deaths, this.Recovered);
+  final String Cases, Deaths, Recovered, tests;
+  const MyChart(this.Cases, this.Deaths, this.Recovered, this.tests);
   @override
   _MyChartState createState() => _MyChartState();
 }
@@ -94,7 +122,8 @@ class _MyChartState extends State<MyChart> {
     final List<CasesData> chartData = [
       CasesData("Total Cases", int.parse(widget.Cases)),
       CasesData("Total Deaths", int.parse(widget.Deaths)),
-      CasesData("Total Cases", int.parse(widget.Recovered))
+      CasesData("Total Recovered", int.parse(widget.Recovered)),
+      CasesData("Total Tests", int.parse(widget.tests))
     ];
     return chartData;
   }
@@ -103,7 +132,9 @@ class _MyChartState extends State<MyChart> {
   Widget build(BuildContext context) {
     return Container(
       child: SfCircularChart(
-        title: ChartTitle(text: "Covid Statistics"),
+        title: ChartTitle(
+            text: "Covid Statistics",
+            textStyle: const TextStyle(fontFamily: 'Nunito')),
         tooltipBehavior: _tooltipBehavior,
         legend:
             Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),

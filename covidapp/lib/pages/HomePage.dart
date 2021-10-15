@@ -28,6 +28,8 @@ class _HomePage extends State<HomePage> {
     todayactive: null,
     todaydeaths: null,
     todaycases: null,
+    critical: null,
+    tests: null,
   );
 
   void getStats(String country) async {
@@ -39,13 +41,14 @@ class _HomePage extends State<HomePage> {
     var responseData = jsonDecode(response.body);
     setState(() {
       Stat obj = Stat(
-        cases: responseData["cases"],
-        deaths: responseData["deaths"],
-        recovered: responseData["recovered"],
-        todayactive: responseData["active"],
-        todaydeaths: responseData["todayDeaths"],
-        todaycases: responseData["todayCases"],
-      );
+          cases: responseData["cases"],
+          deaths: responseData["deaths"],
+          recovered: responseData["recovered"],
+          todayactive: responseData["active"],
+          todaydeaths: responseData["todayDeaths"],
+          todaycases: responseData["todayCases"],
+          critical: responseData["critical"],
+          tests: responseData["totalTests"]);
 
       stat = obj;
     });
@@ -61,7 +64,11 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text("Covid Tracker App")),
+        title: Center(
+            child: const Text(
+          "Covid Tracker App",
+          style: TextStyle(fontFamily: 'Nunito'),
+        )),
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
@@ -147,7 +154,9 @@ class _HomePage extends State<HomePage> {
                             stat.recovered.toString(),
                             stat.todayactive.toString(),
                             stat.todaydeaths.toString(),
-                            stat.todaycases.toString())));
+                            stat.todaycases.toString(),
+                            stat.critical.toString(),
+                            stat.tests.toString())));
                   } else if (chosenCountry == null &&
                       chosenState == null &&
                       chosenCity == null) {
