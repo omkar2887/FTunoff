@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, camel_case_types, file_names, deprecated_member_use, prefer_typing_uninitialized_variables, must_be_immutable, avoid_init_to_null
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, camel_case_types, file_names, deprecated_member_use, prefer_typing_uninitialized_variables, must_be_immutable, avoid_init_to_null, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -94,9 +94,9 @@ class _HomePage extends State<HomePage> {
               WorldData(),
               Container(
                 margin: const EdgeInsets.only(
-                    top: 20, right: 5, left: 5, bottom: 5),
+                    top: 20, right: 5, left: 5, bottom: 10),
                 child: Text(
-                  "Search by region\n",
+                  "Search by region",
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width / 15,
                       fontFamily: 'Nunito',
@@ -146,7 +146,13 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
               ),
-              Text(response.toString()),
+              Container(
+                child: Text(
+                  response.toString(),
+                  style: TextStyle(color: Colors.red),
+                ),
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+              ),
               FlatButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),

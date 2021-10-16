@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, file_names, unused_import, must_be_immutable, prefer_typing_uninitialized_variables, avoid_unnecessary_containers, non_constant_identifier_names, unused_field
+// ignore_for_file: use_key_in_widget_constructors, file_names, unused_import, must_be_immutable, prefer_typing_uninitialized_variables, avoid_unnecessary_containers, non_constant_identifier_names, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element
 
 import 'dart:ffi';
 
@@ -44,75 +44,102 @@ class GoToNext extends StatelessWidget {
           style: const TextStyle(fontFamily: 'Nunito'),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(37, 105, 171, 1),
+        backgroundColor: const Color.fromRGBO(37, 105, 171, 1),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: const [
-              Color.fromRGBO(127, 127, 213, 1),
-              Color.fromRGBO(134, 168, 231, 1),
-              Color.fromRGBO(145, 234, 228, 1)
-            ],
-            //begin: FractionalOffset.bottomCenter,
-            //end: FractionalOffset.topCenter,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromRGBO(127, 127, 213, 1),
+                Color.fromRGBO(134, 168, 231, 1),
+                Color.fromRGBO(145, 234, 228, 1)
+              ],
+              //begin: FractionalOffset.bottomCenter,
+              //end: FractionalOffset.topCenter,
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              margin:
-                  const EdgeInsets.only(top: 15, right: 5, left: 5, bottom: 5),
-              child: Text(
-                "Your Location : " + city.toString() + ", " + state.toString(),
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 28,
-                    color: Colors.white,
-                    fontStyle: FontStyle.normal,
-                    fontFamily: 'Nunito'),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 15, right: 5, left: 5, bottom: 5),
+                child: Text(
+                  "Your Location : " +
+                      city.toString() +
+                      ", " +
+                      state.toString(),
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width / 28,
+                      color: Colors.white,
+                      fontStyle: FontStyle.normal,
+                      fontFamily: 'Nunito'),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stat_Card("Total Cases", cases.toString(),
-                    Color.fromRGBO(80, 200, 120, 1)),
-                Stat_Card("Total Recovered", recovered.toString(),
-                    Color.fromRGBO(80, 200, 120, 1)),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stat_Card("Total Deaths", deaths.toString(),
-                    Color.fromRGBO(255, 191, 0, 1)),
-                Stat_Card("Active", active.toString(),
-                    Color.fromRGBO(255, 191, 0, 1)),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stat_Card(
-                    "Deaths Today", todaydeaths.toString(), Colors.redAccent),
-                Stat_Card(
-                    "Cases Today", todaycases.toString(), Colors.redAccent),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stat_Card("Critical", critical.toString(),
-                    Color.fromRGBO(255, 203, 164, 1)),
-                Stat_Card("Total Tests", tests.toString(),
-                    Color.fromRGBO(255, 203, 164, 1)),
-              ],
-            ),
-            MyChart(cases.toString(), deaths.toString(), recovered.toString(),
-                tests.toString())
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stat_Card(
+                      "Total Cases",
+                      (int.parse(cases.toString()) / 1000000)
+                              .toStringAsFixed(2) +
+                          " M",
+                      Color.fromRGBO(80, 200, 120, 1)),
+                  Stat_Card(
+                      "Total Recovered",
+                      (int.parse(recovered.toString()) / 1000000)
+                              .toStringAsFixed(2) +
+                          " M",
+                      Color.fromRGBO(80, 200, 120, 1)),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stat_Card(
+                      "Total Deaths",
+                      (int.parse(deaths.toString()) / 1000).toStringAsFixed(2) +
+                          " K",
+                      Color.fromRGBO(255, 191, 0, 1)),
+                  Stat_Card(
+                      "Active",
+                      (int.parse(active.toString()) / 1000).toStringAsFixed(2) +
+                          " K",
+                      Color.fromRGBO(255, 191, 0, 1)),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stat_Card(
+                      "Deaths Today", todaydeaths.toString(), Colors.redAccent),
+                  Stat_Card(
+                      "Cases Today", todaycases.toString(), Colors.redAccent),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stat_Card(
+                      "Critical",
+                      (int.parse(critical.toString()) / 1000)
+                              .toStringAsFixed(2) +
+                          " K",
+                      Color.fromRGBO(255, 203, 164, 1)),
+                  Stat_Card(
+                      "Total Tests",
+                      (int.parse(tests.toString()) / 1000000)
+                              .toStringAsFixed(2) +
+                          " M",
+                      Color.fromRGBO(255, 203, 164, 1)),
+                ],
+              ),
+              MyChart(cases.toString(), deaths.toString(), recovered.toString(),
+                  tests.toString())
+            ],
+          ),
         ),
       ),
     );
@@ -149,6 +176,7 @@ class _MyChartState extends State<MyChart> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 20, bottom: 50),
       child: SfCircularChart(
         title: ChartTitle(
             text: "Covid Statistics",
